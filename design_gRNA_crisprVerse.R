@@ -6,30 +6,37 @@
 # https://github.com/crisprVerse/Tutorials/tree/master/Design_CRISPRko_Cas9
 
 # set working directory
-setwd("/Users/bamflappy/GBCF/genomeBrowser/humanTest")
+#setwd("/Users/bamflappy/GBCF/genomeBrowser/humanTest")
+setwd("/home/ebrooks5/GenomeBrowser")
 
 ## Installation
 
 # install the BiocManager and devtools
-#if (!requireNamespace("BiocManager", quietly = TRUE))
-#  install.packages("BiocManager")
-#if (!requireNamespace("devtools", quietly = TRUE))
-#  install.packages("devtools")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+if (!requireNamespace("devtools", quietly = TRUE))
+  install.packages("devtools")
+
+# sudo R
+#installed.packages()[, c("Package", "LibPath")]
+#remove.packages(c("boot", "class", "cluster", "codetools", "foreign", "lattice", "MASS", "Matrix", "mgcv", "nlme", "nnet", "rpart", "spatial", "survival"), lib="/usr/lib/R/library")
 
 # Installing the core crisprVerse packages
-#BiocManager::install(version="devel")
-#BiocManager::install("crisprVerse")
-#BiocManager::install("crisprBase")
-#BiocManager::install("biomaRt")
-#BiocManager::install("crisprDesign")
+#BiocManager::install(version="devel", lib="/home/ebrooks5/R/x86_64-pc-linux-gnu-library/4.3")
+BiocManager::install(version="3.17", force = TRUE)
+BiocManager::install("crisprVerse")
+BiocManager::install("crisprBase")
+BiocManager::install("biomaRt")
+BiocManager::install("crisprDesign")
 #BiocManager::install("crisprBwa")
-#devtools::install_github("crisprVerse/crisprDesignData")
+devtools::install_github("crisprVerse/crisprDesignData")
+#devtools::install.packages("crisprVerse/crisprViz")
 
 # Installing data packages
-#BiocManager::install("BSgenome.Mmusculus.UCSC.mm10")
-#BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
-#BiocManager::install("BSgenome.Hsapiens.UCSC.hg38.dbSNP151.major")
-#BiocManager::install("BSgenome.Hsapiens.UCSC.hg38.dbSNP151.minor")
+BiocManager::install("BSgenome.Mmusculus.UCSC.mm10")
+BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
+BiocManager::install("BSgenome.Hsapiens.UCSC.hg38.dbSNP151.major")
+BiocManager::install("BSgenome.Hsapiens.UCSC.hg38.dbSNP151.minor")
 
 # start by loading the crisprVerse packages
 library(crisprBase)
@@ -42,12 +49,14 @@ library(Rbowtie)
 library(BSgenome.Hsapiens.UCSC.hg38)
 
 # reference genome file path
-fastaFile <- "/Users/bamflappy/GBCF/genomeBrowser/humanTest/hg38.fa.gz"
+# https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+fastaFile <- "/Data/hg38.fa.gz"
 
 # prefix of the hg38 bowtie index
-bowtie_index <- "/Users/bamflappy/GBCF/genomeBrowser/humanTest/hg38"
+bowtie_index <- "hg38"
 
 # path to VCF files for common SNPs (dbSNPs) downloaded from NCBI
+# https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606/VCF/00-common_all.vcf.gz
 #vcf <- "/Users/fortinj2/crisprIndices/snps/dbsnp151.grch38/00-common_all_snps_only.vcf.gz"
 
 # build reference genome index using bowtie
