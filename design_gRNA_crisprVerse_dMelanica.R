@@ -5,69 +5,61 @@
 # Tutorial to design gRNAs that knock out the human KRAS gene
 # https://github.com/crisprVerse/Tutorials/tree/master/Design_CRISPRko_Cas9
 
-# set working directory
-#setwd("/Users/bamflappy/GBCF/genomeBrowser/humanTest")
-setwd("/home/ebrooks5/GenomeBrowser")
-
 ## Installation
 
 # install the BiocManager and devtools
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-if (!requireNamespace("devtools", quietly = TRUE))
-  install.packages("devtools")
-
-# sudo R
-#installed.packages()[, c("Package", "LibPath")]
-#remove.packages(c("boot", "class", "cluster", "codetools", "foreign", "lattice", "MASS", "Matrix", "mgcv", "nlme", "nnet", "rpart", "spatial", "survival"), lib="/usr/lib/R/library")
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
+#if (!requireNamespace("devtools", quietly = TRUE))
+#  install.packages("devtools")
 
 # Installing the core crisprVerse packages
-#BiocManager::install(version="devel", lib="/home/ebrooks5/R/x86_64-pc-linux-gnu-library/4.3")
-BiocManager::install(version="3.17", force = TRUE)
-BiocManager::install("crisprVerse")
-BiocManager::install("crisprBase")
-BiocManager::install("biomaRt")
-BiocManager::install("crisprDesign")
-#BiocManager::install("crisprBwa")
-devtools::install_github("crisprVerse/crisprDesignData")
-#devtools::install.packages("crisprVerse/crisprViz")
+#BiocManager::install(version="3.17", force = TRUE)
+#BiocManager::install("crisprVerse")
+#BiocManager::install("crisprBase")
+#BiocManager::install("biomaRt")
+#BiocManager::install("VariantAnnotation")
+#BiocManager::install("crisprDesign")
+#devtools::install_github("crisprVerse/crisprDesignData")
+#devtools::install_github("crisprVerse/crisprViz")
+#BiocManager::install("GenomicFeatures")
 
-# Installing data packages
-BiocManager::install("BSgenome.Mmusculus.UCSC.mm10")
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg38")
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg38.dbSNP151.major")
-BiocManager::install("BSgenome.Hsapiens.UCSC.hg38.dbSNP151.minor")
+# set working directory
+setwd("/Users/bamflappy/GBCF/genomeBrowser/daphnia")
+#setwd("/home/ebrooks5/GenomeBrowser")
 
 # start by loading the crisprVerse packages
 library(crisprBase)
 library(crisprDesign)
 library(crisprDesignData)
 library(Rbowtie)
-#library(Rbwa)
-
-# load the BSgenome package containing DNA sequences for the hg38 genome
-library(BSgenome.Hsapiens.UCSC.hg38)
+library(GenomicFeatures)
 
 # reference genome file path
-# https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
-fastaFile <- "/Data/hg38.fa.gz"
+fastaFile <- "GCF_021134715.1_ASM2113471v1_genomic_NC_060017.1.fna"
 
-# prefix of the hg38 bowtie index
-bowtie_index <- "hg38"
+# prefix of the bowtie index
+bowtie_index <- "NC_060017"
+
+# retrieve input gff file path
+inputGFF = "genomic.gff"
+
+# store gff3 file as TxDb object
+txdb <- getTxDb(file=inputGFF, organism="Daphnia melanica")
+#txdb <- makeTxDbFromGFF(file=inputGFF, format="gff3", organism="Daphnia melanica")
+
+# create a GRangesList object
+#grList <- TxDb2GRangesList(txdb, genome="Daphnia melanica", seqlevelsStyle="NCBI")
+
 
 # path to VCF files for common SNPs (dbSNPs) downloaded from NCBI
-# https://ftp.ncbi.nlm.nih.gov/snp/organisms/human_9606/VCF/00-common_all.vcf.gz
-#vcf <- "/Users/fortinj2/crisprIndices/snps/dbsnp151.grch38/00-common_all_snps_only.vcf.gz"
+
 
 # build reference genome index using bowtie
-bowtie_build(fastaFile,
-             outdir="./",
-             force=TRUE,
-             prefix="hg38")
-
-# build reference genome index using bwa
-#bwa_build_index(fastaFile,
-#                index_prefix="hg38")
+#bowtie_build(fastaFile,
+#             outdir="./",
+#             force=TRUE,
+#             prefix=bowtie_index)
 
 
 ## Nuclease specification
@@ -82,27 +74,30 @@ SpCas9
 prototypeSequence(SpCas9)
 
 
-## Specification of the target DNA sequence (KRAS CDS)
+## Specification of the target DNA sequence for a gene of interest (LOC124188748)
+## product=deoxyribodipyrimidine photo-lyase-like
+## transcript_id=XM_046581578.1
 
 # obtain from crisprDesignData a GRangesList object that defines the 
-# genomic coordinates (in hg38 coordinates) of coding genes in the human genome
-data(txdb_human, package="crisprDesignData")
+# genomic coordinates of coding genes
+# https://bioconductor.org/packages/devel/bioc/vignettes/GenomicFeatures/inst/doc/GenomicFeatures.html
+txdb_tx <- transcriptsBy(txdb, by="gene")
+txdb_exons <- exonsBy(txdb, by="gene")
 
-# obtain a GRanges object containing the CDS coordinates of KRAS
-gr <- queryTxObject(txObject=txdb_human,
-                    featureType="cds",
-                    queryColumn="gene_symbol",
-                    queryValue="KRAS")
+# obtain a GRanges object containing the CDS coordinates of the gene of interest
+gr_tx <- txdb_tx[["LOC124188748"]]
+gr_exons <- txdb_exons[["LOC124188748"]]
 
-# only consider exons that constitute the primary transcript of KRAS
-# transcript ID ENST00000311936
-gr <- gr[gr$tx_id == "ENST00000311936"]
+# remove NAs
+# https://support.bioconductor.org/p/9135988/
+#keep <- !is.na(mcols(txdb_transcripts)$tx_name)
+#gr <- txdb_transcripts[keep,]
 
-# optionally, adjust the arguments in our call to queryTxObject to retrieve those transcript-specific coordinates
-#gr <- queryTxObject(txObject=txObject,
-#                    featureType="cds",
-#                    queryColumn="tx_id",
-#                    queryValue="ENST00000311936")
+## To-Do ##
+# only consider exons that constitute the primary transcript of the gene of interest
+# transcript ID XM_046581578.1
+primary_tx <- head(gr_tx, 1)$tx_name
+gr <- gr_exons[grep(primary_tx, gr_exons$exon_name), ]
 
 
 ## Finding spacer sequences targeting KRAS
