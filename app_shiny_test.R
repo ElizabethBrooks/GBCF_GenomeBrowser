@@ -2,13 +2,14 @@
 
 library(shiny)
 library(ggplot2)
+library(shinythemes)
 
 # Get the data
 
-file <- "https://github.com/rstudio-education/shiny-course/raw/main/movies.RData"
-destfile <- "movies.RData"
+#file <- "https://github.com/rstudio-education/shiny-course/raw/main/movies.RData"
+#destfile <- "movies.RData"
 
-download.file(file, destfile)
+#download.file(file, destfile)
 
 # Load data 
 
@@ -17,6 +18,11 @@ load("movies.RData")
 # Define UI 
 
 ui <- fluidPage(
+  # view available themes
+  #shinythemes::themeSelector(),
+  
+  # use the superhero theme
+  theme = shinytheme("superhero"),
   
   sidebarLayout(
     
