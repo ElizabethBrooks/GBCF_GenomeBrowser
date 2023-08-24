@@ -31,48 +31,57 @@ setwd("/Users/bamflappy/GBCF/genomeBrowser/daphnia")
 # start by loading the crisprVerse packages
 library(crisprBase)
 library(crisprDesign)
-library(crisprDesignData)
+#library(crisprDesignData)
 library(Rbowtie)
 library(GenomicFeatures)
+library(BSgenome)
+library(BSgenome.Dpulex.KAP4)
 
-# reference genome file path
+# reference genome or chromosome fasta file path
+#fastaFile <- "GCF_021134715.1_ASM2113471v1_genomic.fna"
 fastaFile <- "GCF_021134715.1_ASM2113471v1_genomic_NC_060017.1.fna"
 
 # prefix of the bowtie index
 bowtie_index <- "NC_060017"
 
+## build reference genome index using bowtie
+## it is preferable to build in advance outside R
+##bowtie_build(fastaFile,
+##             outdir="./",
+##             force=TRUE,
+##             prefix=bowtie_index)
+
 # retrieve input gff file path
 inputGFF = "genomic.gff"
 
 # store gff3 file as TxDb object
-txdb <- getTxDb(file=inputGFF, organism="Daphnia melanica")
-#txdb <- makeTxDbFromGFF(file=inputGFF, format="gff3", organism="Daphnia melanica")
+# NCBI gff files have transcript records without IDs that are set to NA
+# it is possible to remove these records or subset the gff (e.g., by gene ID)
+txdb_daphnia <- getTxDb(file=inputGFF, organism="Daphnia melanica")
+#txdb_daphnia <- makeTxDbFromGFF(file=inputGFF, format="gff3", organism="Daphnia melanica")
 
 # create a GRangesList object
-#grList <- TxDb2GRangesList(txdb, genome="Daphnia melanica", seqlevelsStyle="NCBI")
+# Organism 'Daphnia melanica' not recognized in biomaRt.
+#grList <- TxDb2GRangesList(txdb_daphnia, seqlevelsStyle="NCBI")
 
 
+## TO-DO ##
 # path to VCF files for common SNPs (dbSNPs) downloaded from NCBI
-
-
-# build reference genome index using bowtie
-#bowtie_build(fastaFile,
-#             outdir="./",
-#             force=TRUE,
-#             prefix=bowtie_index)
 
 
 ## Nuclease specification
 
-# load the SpCas9 nuclease object from the crisprBase package
+# load the nuclease object from the crisprBase package
 data(SpCas9, package="crisprBase")
+#data(CasRx, package="crisprBase")
 
-# view the SpCas9 nuclease object
+# view the nuclease object
 SpCas9
+#CasRx
 
 # inspect the protospacer construct 
 prototypeSequence(SpCas9)
-
+#prototypeSequence(CasRx)
 
 ## Specification of the target DNA sequence for a gene of interest (LOC124188748)
 ## product=deoxyribodipyrimidine photo-lyase-like
@@ -81,19 +90,19 @@ prototypeSequence(SpCas9)
 # obtain from crisprDesignData a GRangesList object that defines the 
 # genomic coordinates of coding genes
 # https://bioconductor.org/packages/devel/bioc/vignettes/GenomicFeatures/inst/doc/GenomicFeatures.html
-txdb_tx <- transcriptsBy(txdb, by="gene")
-txdb_exons <- exonsBy(txdb, by="gene")
+txdb_tx <- transcriptsBy(txdb_daphnia, by="gene")
+txdb_exons <- exonsBy(txdb_daphnia, by="gene")
 
 # obtain a GRanges object containing the CDS coordinates of the gene of interest
 gr_tx <- txdb_tx[["LOC124188748"]]
 gr_exons <- txdb_exons[["LOC124188748"]]
 
-# remove NAs
-# https://support.bioconductor.org/p/9135988/
-#keep <- !is.na(mcols(txdb_transcripts)$tx_name)
-#gr <- txdb_transcripts[keep,]
+## TO-DO ##
+## consider removing NAs
+## https://support.bioconductor.org/p/9135988/
+##keep <- !is.na(mcols(txdb_transcripts)$tx_name)
+##gr <- txdb_transcripts[keep,]
 
-## To-Do ##
 # only consider exons that constitute the primary transcript of the gene of interest
 # transcript ID XM_046581578.1
 primary_tx <- head(gr_tx, 1)$tx_name
@@ -106,10 +115,11 @@ gr <- gr_exons[grep(primary_tx, gr_exons$exon_name), ]
 # Full genomic sequences for Homo sapiens as provided by UCSC (genome hg38, based on assembly
 # GRCh38.p14 since 2023/01/31)
 # https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.40/
-bsgenome <- BSgenome.Hsapiens.UCSC.hg38
+#bsgenome_daphnia <- Dpulex
 guideSet <- findSpacers(gr,
-                        bsgenome=bsgenome,
+                        bsgenome=Dpulex,
                         crisprNuclease=SpCas9)
+                        #crisprNuclease=CasRx)
 
 # view the genomic coordinates (PAM sites) for all found spacer sequences
 guideSet
@@ -138,9 +148,12 @@ head(guideSet)
 guideSet <- addSpacerAlignments(guideSet,
                                 aligner="bowtie",
                                 aligner_index=bowtie_index,
-                                bsgenome=BSgenome.Hsapiens.UCSC.hg38,
-                                n_mismatches=2,
-                                txObject=txdb_human)
+                                bsgenome=Dpulex,
+                                ## annotate genomic alignments with a gene model annotation
+                                ## https://bioconductor.org/packages/devel/bioc/vignettes/crisprDesign/inst/doc/intro.html
+                                ## Organism 'Daphnia melanica' not recognized in biomaRt.
+                                ##txObject=txdb_daphnia,
+                                n_mismatches=2)
 
 # view the results
 guideSet
@@ -148,26 +161,28 @@ guideSet
 # inspect individual on- and off-targets and their context
 alignments(guideSet)
 
+
+## TO-DO ##
 ## Removing repeat elements
 
-# remove promiscuous protospacer sequences that occur in repeats 
-# or low-complexity DNA sequences
-data("gr.repeats.hg38", package="crisprDesignData")
-guideSet <- removeRepeats(guideSet,
-                          gr.repeats=gr.repeats.hg38)
+## remove promiscuous protospacer sequences that occur in repeats 
+## or low-complexity DNA sequences
+## a GRanges object containing repeat elements regions
+##gr.repeats.daphnia <-
+##guideSet <- removeRepeats(guideSet,
+##                          gr.repeats=gr.repeats.daphnia)
 
 
-
-
-
+## TO-DO ##
 ## Off-target scoring (MIT and CFD specificity scores)
 
-# predict the likelihood of the nuclease to cut at the off-target 
-# locations based on mismatch tolerance
-guideSet <- addOffTargetScores(guideSet)
+## predict the likelihood of the nuclease to cut at the off-target 
+## locations based on mismatch tolerance
+## errors if no off targets to score
+##guideSet <- addOffTargetScores(guideSet)
 
-# view the results
-guideSet
+## view the results
+##guideSet
 
 ## On-target scoring (gRNA efficiency)
 
