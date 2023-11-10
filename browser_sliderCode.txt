@@ -1,0 +1,44 @@
+<div class="slider-item">
+	<div class="slider-img">
+		<img src="sites/default/files/GBCF_genomeBrowser_daphniaSliderFramed.png" alt="slider" />
+	</div><!-- end slider-img one -->
+	<div class="slider-text-container">
+		<div class="container">
+			<div class="slider-text">
+				<h1 style="color:white;">Daphnia magna</h1>
+				<br />
+				<a class="button" href="#">Explore</a>
+			</div><!-- /.slider-text -->          
+		</div><!-- /.container -->
+	</div><!-- /.slider-text-container -->
+</div><!-- end slider-item one -->
+
+<div class="slider-item">
+	<div class="slider-img">
+		<img src="sites/default/files/GBCF_genomeBrowser_daphniaSliderFramed.png" alt="slider" />
+	</div><!-- end slider-img two -->
+	<div class="slider-text-container">
+		<div class="container">
+			<div class="slider-text">
+				<h1 style="color:white;">Daphnia pulex</h1>
+				<br />
+				<a class="button" href="#">Explore</a>
+			</div><!-- /.slider-text -->          
+		</div><!-- /.container -->
+	</div><!-- /.slider-text-container -->
+</div><!-- end slider-item two -->
+
+<div class="slider-item">
+	<div class="slider-img">
+		<img src="sites/default/files/GBCF_genomeBrowser_daphniaSliderFramed.png" alt="slider" />
+	</div><!-- end slider-img three -->
+	<div class="slider-text-container">
+		<div class="container">
+			<div class="slider-text">
+				<h1 style="color:white;">Daphnia pulicaria</h1>
+				<br />
+				<a class="button" href="#">Explore</a>
+			</div><!-- /.slider-text -->          
+		</div><!-- /.container -->
+	</div><!-- /.slider-text-container -->
+</div><!-- end slider-item three -->

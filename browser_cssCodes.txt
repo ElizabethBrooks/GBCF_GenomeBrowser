@@ -1,0 +1,61 @@
+.region-primary-menu .menu-item-level-1 a, .region-primary-menu .menu-item-level-1 > span{
+     color: white;
+}
+
+#slider {
+     width: 100%;
+     height: 52vh;
+     min-height: 52vh;
+     background-color: white;
+}
+
+.slider-img {
+     height: 52vh;
+}
+
+.slider-text-container {
+     height: 52vh;
+}
+
+.home-slider .owl-stage-outer {
+    height: 52vh;
+}
+
+.slider-text {
+     text-shadow: #0c2340 1px 0 10px;
+}
+
+.button{
+     background-color: #0a843d;
+}
+
+.button:hover {
+     background-color: white;
+     color: #0a843d;
+     border-color: #0a843d;
+}
+
+.owl-dots{
+     background-color: #ae9142;
+}
+
+.page-title-wrap::before {
+     background-color: #ae9142;
+}
+
+.page-title {
+     background-color: #ae9142;
+     -webkit-text-fill-color: white;
+}
+
+.block-title{
+     color: #0c2340;
+}
+
+.scrolltop {
+     background: #1C5E90;
+}
+
+.share-node-title{
+     color: #1C5E90;
+}
