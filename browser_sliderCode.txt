@@ -1,6 +1,6 @@
 <div class="slider-item">
 	<div class="slider-img">
-		<img src="sites/default/files/GBCF_genomeBrowser_daphniaSliderFramed.png" alt="slider" />
+		<img src="sites/default/files/GBCF_genomeBrowserSlider_magna_sized.png" alt="slider" />
 	</div><!-- end slider-img one -->
 	<div class="slider-text-container">
 		<div class="container">
@@ -15,7 +15,7 @@
 
 <div class="slider-item">
 	<div class="slider-img">
-		<img src="sites/default/files/GBCF_genomeBrowser_daphniaSliderFramed.png" alt="slider" />
+		<img src="sites/default/files/GBCF_genomeBrowserSlider_pulicaria_sized.png" alt="slider" />
 	</div><!-- end slider-img two -->
 	<div class="slider-text-container">
 		<div class="container">
@@ -30,7 +30,7 @@
 
 <div class="slider-item">
 	<div class="slider-img">
-		<img src="sites/default/files/GBCF_genomeBrowser_daphniaSliderFramed.png" alt="slider" />
+		<img src="sites/default/files/GBCF_genomeBrowserSlider_pulicaria_sized.png" alt="slider" />
 	</div><!-- end slider-img three -->
 	<div class="slider-text-container">
 		<div class="container">

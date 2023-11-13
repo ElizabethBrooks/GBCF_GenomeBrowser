@@ -1,61 +1,85 @@
+/* change menu bar text color */
 .region-primary-menu .menu-item-level-1 a, .region-primary-menu .menu-item-level-1 > span{
      color: white;
 }
 
+/* change slider and slider parts sizes to 50vh (half view height) */
 #slider {
      width: 100%;
-     height: 52vh;
-     min-height: 52vh;
+     height: 50vh;
+     min-height: 50vh;
      background-color: white;
 }
 
-.slider-img {
-     height: 52vh;
+/*.slider-item {
+     height: 50vh;
+}*/
+
+.slider-img img {
+     height: 50vh;
 }
 
 .slider-text-container {
-     height: 52vh;
+     height: 50vh;
 }
 
 .home-slider .owl-stage-outer {
-    height: 52vh;
+    height: 51vh;
 }
 
 .slider-text {
      text-shadow: #0c2340 1px 0 10px;
 }
 
+/* change slider dots background color */
+.owl-dots{
+     background-color: #ae9142;
+}
+
+/* change slider button background color */
 .button{
      background-color: #0a843d;
 }
 
+/* change slider button hover colors */
 .button:hover {
      background-color: white;
      color: #0a843d;
      border-color: #0a843d;
 }
 
-.owl-dots{
-     background-color: #ae9142;
+/* change highlighted text color */
+a {
+     color: #ae9142;
 }
 
-.page-title-wrap::before {
-     background-color: #ae9142;
-}
-
-.page-title {
-     background-color: #ae9142;
-     -webkit-text-fill-color: white;
-}
-
+/* change hompage block title color */
 .block-title{
      color: #0c2340;
 }
 
+/* change homepage block title bar color */
+.homepage-content .block-title::after {
+     background: #ae9142;
+}
+
+/* change page title banner background color */
+.page-title-wrap::before {
+     background-color: #F1B82D;
+}
+
+/* change page title color */
+.page-title {
+     background-color: #F1B82D;
+     -webkit-text-fill-color: white;
+}
+
+/* change scroll button background color */
 .scrolltop {
      background: #1C5E90;
 }
 
+/* change social icons button color */
 .share-node-title{
      color: #1C5E90;
 }
