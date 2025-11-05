@@ -11,10 +11,6 @@
      background-color: white;
 }
 
-/*.slider-item {
-     height: 50vh;
-}*/
-
 .slider-img img {
      height: 50vh;
 }
@@ -61,6 +57,13 @@ a {
 /* change homepage block title bar color */
 .homepage-content .block-title::after {
      background: #ae9142;
+}
+
+/* change sub page view size */
+#view {
+     width: 100%;
+     height: 50vh;
+     min-height: 50vh;
 }
 
 /* change page title banner background color */
