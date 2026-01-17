@@ -1,12 +1,12 @@
 # created: Sheri Sanders
 # modified: Elizabeth Brooks
-# laste updated: 5 November 2025
+# last updated: 16 January 2026
 
 ## Code for the User Interface through Shiny
 
 # lists of dependent packages
 packageList <- c("BiocManager", "shiny", "seqinr", "kableExtra")
-biocList <- c("rtracklayer", "GenomicAlignments", "BSgenome", "crispRdesignR")
+biocList <- c("rtracklayer", "GenomicAlignments", "BSgenome", "crispRdesignR", "BSgenomeForge")
 # check for any missing packages
 newPackages <- packageList[!(packageList %in% installed.packages()[,"Package"])]
 newBioc <- biocList[!(biocList %in% installed.packages()[,"Package"])]
@@ -22,6 +22,16 @@ if(length(newBioc)){
 library(crispRdesignR)
 library(seqinr)
 
+## IMPORTANT ##
+## forge and load genome data
+## this needs to be done once before running
+## https://www.bioconductor.org/packages//2.7/bioc/vignettes/BSgenome/inst/doc/BSgenomeForge.pdf
+BSgenomeForge::forgeBSgenomeDataPkg("/Users/bamflappy/Repos/GBCF_GenomeBrowser/data/BSgenome.Dmagna.LRV0", replace=TRUE)
+## once forgeBSgenomeDataPkg is done build the source package in the terminal
+## R CMD build <pkgdir>
+## R CMD check <tarball>
+## R CMD INSTALL <tarball>
+
 installed_genomes <- BSgenome::installed.genomes()
 installed_genomes_names <- c()
 if (length(installed_genomes) == 0) {
@@ -36,7 +46,7 @@ if (length(installed_genomes) == 0) {
   names(installed_genomes) <- installed_genomes_names
 }
 
-gene_list=list("Dmagna006965-T1","Dmagna006964-T1")
+gene_list=list("Dmagna031332-T1","Dmagna034057-T2")
 gene_list=list.files("./pre_run/", pattern="*hits.RDS", all.files=TRUE, full.names=FALSE)
 gene_list=lapply(X=gene_list, FUN = function(t) gsub(pattern=".hits.RDS", replacement="", x=t, fixed=TRUE))
 
@@ -49,7 +59,7 @@ ui <- fluidPage(
                           tags$div(id = "placeholder1"),
                           selectizeInput("genome_select", "Select Genome",
                                       installed_genomes),
-                          textInput("gene_select","Enter Gene Name","i.e. Dmagna00243-T1"),
+                          textInput("gene_select","Enter Gene Name","Dmagna034057-T1"),
                           tags$div(id = "placeholder5"),
                           actionButton("run", "Find sgRNA", icon("paper-plane"))
                         ),
