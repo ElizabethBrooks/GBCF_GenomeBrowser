@@ -19,7 +19,7 @@
 ## run in the console
 ##setwd("/Users/bamflappy/Repos/GBCF_GenomeBrowser/gRNA_design")
 ##library(rsconnect)
-##options(rsconnect.max.bundle.files = 60000)
+options(rsconnect.max.bundle.files = 60000)
 ##writeManifest()
 
 # lists of dependent packages
