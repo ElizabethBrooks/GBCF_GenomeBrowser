@@ -1,6 +1,6 @@
 # created: Sheri Sanders
 # modified: Elizabeth Brooks
-# updated: 16 January 2026
+# updated: 19 January 2026
 
 # gRNA design Shiny application using crispRdesignR
 
@@ -17,7 +17,7 @@
 ## Posit Connect Cloud Setup ##
 ## generate a manifest.json for posit connect cloud
 ## run in the console
-##setwd("/Users/bamflappy/Downloads/GBCF_GenomeBrowser/gRNA_design")
+##setwd("/Users/bamflappy/Repos/GBCF_GenomeBrowser/gRNA_design")
 ##library(rsconnect)
 ##options(rsconnect.max.bundle.files = 60000)
 ##writeManifest()
