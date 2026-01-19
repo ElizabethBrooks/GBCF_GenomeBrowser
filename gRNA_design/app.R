@@ -62,11 +62,11 @@ if(length(newBioc)){
 ## forge and load genome data
 ## https://www.bioconductor.org/packages//2.7/bioc/vignettes/BSgenome/inst/doc/BSgenomeForge.pdf
 data_dir <- "BSgenome.Dmagna.LRV0"
-#if (!dir.exists(data_dir)) {
+if (!dir.exists(data_dir)) {
   BiocManager::install("BSgenomeForge")
   library(BSgenomeForge)
   BSgenomeForge::forgeBSgenomeDataPkg(paste0("data/", data_dir), replace=TRUE)
-#}
+}
 ## once forgeBSgenomeDataPkg is done build the source package in the terminal
 ##R CMD build <pkgdir>
 ##R CMD check <tarball>
@@ -76,7 +76,8 @@ data_dir <- "BSgenome.Dmagna.LRV0"
 library(crispRdesignR)
 library(seqinr)
 
-installed_genomes <- BSgenome::installed.genomes()
+#installed_genomes <- BSgenome::installed.genomes()
+installed_genomes <- data_dir
 installed_genomes_names <- c()
 if (length(installed_genomes) == 0) {
   installed_genomes[length(installed_genomes)+1] <- "no_genomes_installed"

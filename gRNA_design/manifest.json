@@ -2582,31 +2582,28 @@
         "Type": "Package",
         "Package": "rappdirs",
         "Title": "Application Directories: Determine Where to Save Data, Caches,\nand Logs",
-        "Version": "0.3.3",
-        "Authors@R": "\n    c(person(given = \"Hadley\",\n             family = \"Wickham\",\n             role = c(\"trl\", \"cre\", \"cph\"),\n             email = \"hadley@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = \"cph\"),\n      person(given = \"Sridhar\",\n             family = \"Ratnakumar\",\n             role = \"aut\"),\n      person(given = \"Trent\",\n             family = \"Mick\",\n             role = \"aut\"),\n      person(given = \"ActiveState\",\n             role = \"cph\",\n             comment = \"R/appdir.r, R/cache.r, R/data.r, R/log.r translated from appdirs\"),\n      person(given = \"Eddy\",\n             family = \"Petrisor\",\n             role = \"ctb\"),\n      person(given = \"Trevor\",\n             family = \"Davis\",\n             role = c(\"trl\", \"aut\")),\n      person(given = \"Gabor\",\n             family = \"Csardi\",\n             role = \"ctb\"),\n      person(given = \"Gregory\",\n             family = \"Jefferis\",\n             role = \"ctb\"))",
-        "Description": "An easy way to determine which directories on the\n    users computer you should use to save data, caches and logs. A port of\n    Python's 'Appdirs' (<https://github.com/ActiveState/appdirs>) to\n    R.",
+        "Version": "0.3.4",
+        "Authors@R": "c(\n    person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"trl\", \"cre\", \"cph\")),\n    person(\"Sridhar\", \"Ratnakumar\", role = \"aut\"),\n    person(\"Trent\", \"Mick\", role = \"aut\"),\n    person(\"ActiveState\", role = \"cph\",\n           comment = \"R/appdir.r, R/cache.r, R/data.r, R/log.r translated from appdirs\"),\n    person(\"Eddy\", \"Petrisor\", role = \"ctb\"),\n    person(\"Trevor\", \"Davis\", role = c(\"trl\", \"aut\"),\n           comment = c(ORCID = \"0000-0001-6341-4639\")),\n    person(\"Gabor\", \"Csardi\", role = \"ctb\"),\n    person(\"Gregory\", \"Jefferis\", role = \"ctb\"),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"),\n           comment = c(ROR = \"03wc8by49\"))\n  )",
+        "Description": "An easy way to determine which directories on the users\n    computer you should use to save data, caches and logs. A port of\n    Python's 'Appdirs' (<https://github.com/ActiveState/appdirs>) to R.",
         "License": "MIT + file LICENSE",
         "URL": "https://rappdirs.r-lib.org, https://github.com/r-lib/rappdirs",
         "BugReports": "https://github.com/r-lib/rappdirs/issues",
-        "Depends": "R (>= 3.2)",
-        "Suggests": "roxygen2, testthat (>= 3.0.0), covr, withr",
-        "Copyright": "Original python appdirs module copyright (c) 2010\nActiveState Software Inc. R port copyright Hadley Wickham,\nRStudio. See file LICENSE for details.",
-        "Encoding": "UTF-8",
-        "RoxygenNote": "7.1.1",
+        "Depends": "R (>= 4.1)",
+        "Suggests": "covr, roxygen2, testthat (>= 3.2.0), withr",
+        "Config/Needs/website": "tidyverse/tidytemplate",
         "Config/testthat/edition": "3",
+        "Config/usethis/last-upkeep": "2025-05-05",
+        "Copyright": "Original python appdirs module copyright (c) 2010\nActiveState Software Inc. R port copyright Hadley Wickham,\nPosit, PBC.  See file LICENSE for details.",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.3.3",
         "NeedsCompilation": "yes",
-        "Packaged": "2021-01-28 22:29:57 UTC; hadley",
-        "Author": "Hadley Wickham [trl, cre, cph],\n  RStudio [cph],\n  Sridhar Ratnakumar [aut],\n  Trent Mick [aut],\n  ActiveState [cph] (R/appdir.r, R/cache.r, R/data.r, R/log.r translated\n    from appdirs),\n  Eddy Petrisor [ctb],\n  Trevor Davis [trl, aut],\n  Gabor Csardi [ctb],\n  Gregory Jefferis [ctb]",
-        "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+        "Packaged": "2026-01-16 22:03:30 UTC; hadleywickham",
+        "Author": "Hadley Wickham [trl, cre, cph],\n  Sridhar Ratnakumar [aut],\n  Trent Mick [aut],\n  ActiveState [cph] (R/appdir.r, R/cache.r, R/data.r, R/log.r translated\n    from appdirs),\n  Eddy Petrisor [ctb],\n  Trevor Davis [trl, aut] (ORCID:\n    <https://orcid.org/0000-0001-6341-4639>),\n  Gabor Csardi [ctb],\n  Gregory Jefferis [ctb],\n  Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
+        "Maintainer": "Hadley Wickham <hadley@posit.co>",
         "Repository": "CRAN",
-        "Date/Publication": "2021-01-31 05:40:02 UTC",
-        "Built": "R 4.5.0; aarch64-apple-darwin20; 2025-03-31 21:43:44 UTC; unix",
-        "Archs": "rappdirs.so.dSYM",
-        "RemoteType": "standard",
-        "RemotePkgRef": "rappdirs",
-        "RemoteRef": "rappdirs",
-        "RemoteRepos": "http://cran.rstudio.com",
-        "RemoteSha": "0.3.3"
+        "Date/Publication": "2026-01-17 08:40:02 UTC",
+        "Built": "R 4.5.2; aarch64-apple-darwin20; 2026-01-17 11:42:54 UTC; unix",
+        "Archs": "rappdirs.so.dSYM"
       }
     },
     "restfulr": {
@@ -3444,12 +3441,12 @@
         "Package": "xfun",
         "Type": "Package",
         "Title": "Supporting Functions for Packages Maintained by 'Yihui Xie'",
-        "Version": "0.55",
+        "Version": "0.56",
         "Authors@R": "c(\n  person(\"Yihui\", \"Xie\", role = c(\"aut\", \"cre\", \"cph\"), email = \"xie@yihui.name\", comment = c(ORCID = \"0000-0003-0645-5666\", URL = \"https://yihui.org\")),\n  person(\"Wush\", \"Wu\", role = \"ctb\"),\n  person(\"Daijiang\", \"Li\", role = \"ctb\"),\n  person(\"Xianying\", \"Tan\", role = \"ctb\"),\n  person(\"Salim\", \"Brüggemann\", role = \"ctb\", email = \"salim-b@pm.me\", comment = c(ORCID = \"0000-0002-5329-5987\")),\n  person(\"Christophe\", \"Dervieux\", role = \"ctb\"),\n  person()\n  )",
         "Description": "Miscellaneous functions commonly used in other packages maintained by 'Yihui Xie'.",
         "Depends": "R (>= 3.2.0)",
         "Imports": "grDevices, stats, tools",
-        "Suggests": "testit, parallel, codetools, methods, rstudioapi, tinytex (>=\n0.30), mime, litedown (>= 0.6), commonmark, knitr (>= 1.50),\nremotes, pak, curl, xml2, jsonlite, magick, yaml, data.table,\nqs2, qs",
+        "Suggests": "testit, parallel, codetools, methods, rstudioapi, tinytex (>=\n0.30), mime, litedown (>= 0.6), commonmark, knitr (>= 1.50),\nremotes, pak, curl, xml2, jsonlite, magick, yaml, data.table,\nqs2",
         "License": "MIT + file LICENSE",
         "URL": "https://github.com/yihui/xfun",
         "BugReports": "https://github.com/yihui/xfun/issues",
@@ -3457,12 +3454,12 @@
         "RoxygenNote": "7.3.3",
         "VignetteBuilder": "litedown",
         "NeedsCompilation": "yes",
-        "Packaged": "2025-12-15 17:41:07 UTC; yihui",
+        "Packaged": "2026-01-18 04:03:19 UTC; yihui",
         "Author": "Yihui Xie [aut, cre, cph] (ORCID:\n    <https://orcid.org/0000-0003-0645-5666>, URL: https://yihui.org),\n  Wush Wu [ctb],\n  Daijiang Li [ctb],\n  Xianying Tan [ctb],\n  Salim Brüggemann [ctb] (ORCID: <https://orcid.org/0000-0002-5329-5987>),\n  Christophe Dervieux [ctb]",
         "Maintainer": "Yihui Xie <xie@yihui.name>",
         "Repository": "CRAN",
-        "Date/Publication": "2025-12-16 06:10:03 UTC",
-        "Built": "R 4.5.2; aarch64-apple-darwin20; 2025-12-16 07:24:59 UTC; unix",
+        "Date/Publication": "2026-01-18 06:10:03 UTC",
+        "Built": "R 4.5.2; aarch64-apple-darwin20; 2026-01-18 06:33:20 UTC; unix",
         "Archs": "xfun.so.dSYM"
       }
     },
@@ -3472,7 +3469,7 @@
       "description": {
         "Package": "xml2",
         "Title": "Parse XML",
-        "Version": "1.5.1",
+        "Version": "1.5.2",
         "Authors@R": "c(\n    person(\"Hadley\", \"Wickham\", role = \"aut\"),\n    person(\"Jim\", \"Hester\", role = \"aut\"),\n    person(\"Jeroen\", \"Ooms\", email = \"jeroenooms@gmail.com\", role = c(\"aut\", \"cre\")),\n    person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")),\n    person(\"R Foundation\", role = \"ctb\",\n           comment = \"Copy of R-project homepage cached as example\")\n  )",
         "Description": "Bindings to 'libxml2' for working with XML data using a simple, \n    consistent interface based on 'XPath' expressions. Also supports XML schema\n    validation; for 'XSLT' transformations see the 'xslt' package.",
         "License": "MIT + file LICENSE",
@@ -3489,12 +3486,12 @@
         "Collate": "'S4.R' 'as_list.R' 'xml_parse.R' 'as_xml_document.R'\n'classes.R' 'format.R' 'import-standalone-obj-type.R'\n'import-standalone-purrr.R' 'import-standalone-types-check.R'\n'init.R' 'nodeset_apply.R' 'paths.R' 'utils.R' 'xml2-package.R'\n'xml_attr.R' 'xml_children.R' 'xml_document.R' 'xml_find.R'\n'xml_missing.R' 'xml_modify.R' 'xml_name.R' 'xml_namespaces.R'\n'xml_node.R' 'xml_nodeset.R' 'xml_path.R' 'xml_schema.R'\n'xml_serialize.R' 'xml_structure.R' 'xml_text.R' 'xml_type.R'\n'xml_url.R' 'xml_write.R' 'zzz.R'",
         "Config/testthat/edition": "3",
         "NeedsCompilation": "yes",
-        "Packaged": "2025-12-01 13:01:48 UTC; jeroen",
+        "Packaged": "2026-01-17 13:03:05 UTC; jeroen",
         "Author": "Hadley Wickham [aut],\n  Jim Hester [aut],\n  Jeroen Ooms [aut, cre],\n  Posit Software, PBC [cph, fnd],\n  R Foundation [ctb] (Copy of R-project homepage cached as example)",
         "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
         "Repository": "CRAN",
-        "Date/Publication": "2025-12-01 14:40:02 UTC",
-        "Built": "R 4.5.2; aarch64-apple-darwin20; 2025-12-01 19:27:22 UTC; unix",
+        "Date/Publication": "2026-01-17 16:10:02 UTC",
+        "Built": "R 4.5.2; aarch64-apple-darwin20; 2026-01-17 16:23:11 UTC; unix",
         "Archs": "xml2.so.dSYM"
       }
     },
@@ -3560,7 +3557,7 @@
   },
   "files": {
     "app.R": {
-      "checksum": "4006abee88b6a05739ece60f01d0f5b5"
+      "checksum": "dd066383fefa15f0bc9a8ab240d5bf2d"
     },
     "BSgenome.Dmagna.LRV0/DESCRIPTION": {
       "checksum": "d535a16d05ad19931cd3336b40a42964"
@@ -3578,7 +3575,7 @@
       "checksum": "15c79f8dfffc87ce3237ae123a1bf5da"
     },
     "data/BSgenome.Dmagna.LRV0": {
-      "checksum": "faa4dd9c3d8343de2e35db7e3e543356"
+      "checksum": "07a3794e8c7fc440e6a4a4e810b0a042"
     },
     "data/LG1.fa": {
       "checksum": "912057fe43a90efaa1015f3197ce3d4a"
