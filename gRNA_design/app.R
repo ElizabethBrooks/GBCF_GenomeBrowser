@@ -77,19 +77,22 @@ library(crispRdesignR)
 library(seqinr)
 
 #installed_genomes <- BSgenome::installed.genomes()
+#installed_genomes <- paste0("/Users/bamflappy/Repos/GBCF_GenomeBrowser/gRNA_design/", data_dir)
+#installed_genomes <- paste0("/cloud/project/gRNA_design/", data_dir)
 installed_genomes <- data_dir
-installed_genomes_names <- c()
-if (length(installed_genomes) == 0) {
-  installed_genomes[length(installed_genomes)+1] <- "no_genomes_installed"
-  installed_genomes_names[length(installed_genomes_names)+1] <- "No genomes installed"
-  names(installed_genomes) <- installed_genomes_names
-} else {
-  for (i in 1:length(installed_genomes)) {
-    genome_name <- paste(BSgenome::organism(BSgenome::getBSgenome(installed_genomes[i])), " (", metadata(get(installed_genomes[i]))$genome, ")", sep="")
-    installed_genomes_names[length(installed_genomes_names)+1] <- genome_name
-  }
-  names(installed_genomes) <- installed_genomes_names
-}
+
+#installed_genomes_names <- c()
+#if (length(installed_genomes) == 0) {
+#  installed_genomes[length(installed_genomes)+1] <- "no_genomes_installed"
+#  installed_genomes_names[length(installed_genomes_names)+1] <- "No genomes installed"
+#  names(installed_genomes) <- installed_genomes_names
+#} else {
+#  for (i in 1:length(installed_genomes)) {
+#    genome_name <- paste(BSgenome::organism(BSgenome::getBSgenome(installed_genomes[i])), " (", metadata(get(installed_genomes[i]))$genome, ")", sep="")
+#    installed_genomes_names[length(installed_genomes_names)+1] <- genome_name
+#  }
+#  names(installed_genomes) <- installed_genomes_names
+#}
 
 gene_list=list("Dmagna031332-T1","Dmagna034057-T2")
 gene_list=list.files("pre_run/", pattern="*hits.RDS", all.files=TRUE, full.names=FALSE)
