@@ -4,23 +4,45 @@
 
 # gRNA design Shiny application using crispRdesignR
 
-## Data Setup ##
-## forge and load genome data
-## https://www.bioconductor.org/packages//2.7/bioc/vignettes/BSgenome/inst/doc/BSgenomeForge.pdf
-##library(BSgenomeForge)
-##BSgenomeForge::forgeBSgenomeDataPkg("./data/BSgenome.Dmagna.LRV0", replace=TRUE)
-## once forgeBSgenomeDataPkg is done build the source package in the terminal
-##R CMD build <pkgdir>
-##R CMD check <tarball>
-##R CMD INSTALL <tarball>
-
 ## Posit Connect Cloud Setup ##
 ## generate a manifest.json for posit connect cloud
+# https://docs.posit.co/connect-cloud/how-to/r/dependencies.html
 ## run in the console
 ##setwd("/Users/bamflappy/Repos/GBCF_GenomeBrowser/gRNA_design")
+##install.packages("rsconnect")
 ##library(rsconnect)
-options(rsconnect.max.bundle.files = 60000)
 ##writeManifest()
+
+## Pre-Run Data Setup ##
+# https://forum.posit.co/t/changing-rsconnect-max-bundle-files/185430/3
+destination_dir <- "pre_run"
+if (!dir.exists(destination_dir)) {
+  dir.create(destination_dir)
+  # subset 1
+  source_dir <- "pre_run_subset1"
+  source_dir_zip <- paste0(source_dir, ".zip")
+  unzip(zipfile = paste0("data/", source_dir_zip))
+  files_to_move <- list.files(source_dir, full.names = TRUE)
+  new_paths <- file.path(destination_dir, basename(files_to_move))
+  fs::file_move(files_to_move, new_paths)
+  unlink(c(source_dir), recursive=TRUE)
+  # subset 2
+  source_dir <- "pre_run_subset2"
+  source_dir_zip <- paste0(source_dir, ".zip")
+  unzip(zipfile = paste0("data/", source_dir_zip))
+  files_to_move <- list.files(source_dir, full.names = TRUE)
+  new_paths <- file.path(destination_dir, basename(files_to_move))
+  fs::file_move(files_to_move, new_paths)
+  unlink(c(source_dir), recursive=TRUE)
+  # subset 3
+  source_dir <- "pre_run_subset3"
+  source_dir_zip <- paste0(source_dir, ".zip")
+  unzip(zipfile = paste0("data/", source_dir_zip))
+  files_to_move <- list.files(source_dir, full.names = TRUE)
+  new_paths <- file.path(destination_dir, basename(files_to_move))
+  fs::file_move(files_to_move, new_paths)
+  unlink(c(source_dir), recursive=TRUE)
+}
 
 # lists of dependent packages
 packageList <- c("BiocManager", "shiny", "seqinr", "kableExtra")
@@ -35,6 +57,20 @@ if(length(newPackages)){
 if(length(newBioc)){
   BiocManager::install(newBioc)
 }
+
+## Genome Data Setup ##
+## forge and load genome data
+## https://www.bioconductor.org/packages//2.7/bioc/vignettes/BSgenome/inst/doc/BSgenomeForge.pdf
+data_dir <- "./data/BSgenome.Dmagna.LRV0"
+if (!dir.exists(data_dir)) {
+  BiocManager::install("BSgenomeForge")
+  library(BSgenomeForge)
+  BSgenomeForge::forgeBSgenomeDataPkg(data_dir)
+}
+## once forgeBSgenomeDataPkg is done build the source package in the terminal
+##R CMD build <pkgdir>
+##R CMD check <tarball>
+##R CMD INSTALL <tarball>
 
 #library(shiny)
 library(crispRdesignR)
@@ -55,7 +91,7 @@ if (length(installed_genomes) == 0) {
 }
 
 gene_list=list("Dmagna031332-T1","Dmagna034057-T2")
-gene_list=list.files("./pre_run/", pattern="*hits.RDS", all.files=TRUE, full.names=FALSE)
+gene_list=list.files("pre_run/", pattern="*hits.RDS", all.files=TRUE, full.names=FALSE)
 gene_list=lapply(X=gene_list, FUN = function(t) gsub(pattern=".hits.RDS", replacement="", x=t, fixed=TRUE))
 
 ui <- fluidPage(
@@ -128,12 +164,12 @@ server <- function(input, output) {
              gene_annotation_file("placeholder")
           }
 
-           filename = paste("./pre_run/",input$'gene_select',".hits.RDS",sep="")
+           filename = paste("pre_run/",input$'gene_select',".hits.RDS",sep="")
            hits = readRDS(file=filename)
 
            if ((length(hits) == 0) == FALSE) {
           ## Starts creating the sgRNA table
-              filename2 = paste("./pre_run/",input$'gene_select',".int_sgRNA.RDS",sep="")
+              filename2 = paste("pre_run/",input$'gene_select',".int_sgRNA.RDS",sep="")
               int_sgRNA_data = readRDS(filename2)
 
           ## Adds color to indicate unfavorable GC content
@@ -188,7 +224,7 @@ server <- function(input, output) {
           ## Outputs the Table
             maindf$sgRNA_data <- proc_sgRNA_data
             downloadmaindf$sgRNA_data <- int_sgRNA_data
-            filename3 = paste("./pre_run/",input$'gene_select',".int_offtarget.RDS",sep="")
+            filename3 = paste("pre_run/",input$'gene_select',".int_offtarget.RDS",sep="")
             int_offtarget_data = readRDS(filename3)
 
             ## Adds code to color mismatches red within the off target sequences
