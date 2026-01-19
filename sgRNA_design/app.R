@@ -3,6 +3,7 @@
 # updated: 19 January 2026
 
 # gRNA design Shiny application using crispRdesignR
+# this app was adjusted for classroom use through posit connect cloud
 
 ## Posit Connect Cloud Setup ##
 ## generate a manifest.json for posit connect cloud
