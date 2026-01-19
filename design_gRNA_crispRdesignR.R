@@ -22,11 +22,9 @@ if(length(newBioc)){
 library(crispRdesignR)
 library(seqinr)
 
-## IMPORTANT ##
 ## forge and load genome data
-## this needs to be done once before running
 ## https://www.bioconductor.org/packages//2.7/bioc/vignettes/BSgenome/inst/doc/BSgenomeForge.pdf
-BSgenomeForge::forgeBSgenomeDataPkg("/Users/bamflappy/Repos/GBCF_GenomeBrowser/data/BSgenome.Dmagna.LRV0", replace=TRUE)
+#BSgenomeForge::forgeBSgenomeDataPkg("/Users/bamflappy/Repos/GBCF_GenomeBrowser/data/BSgenome.Dmagna.LRV0", replace=TRUE)
 ## once forgeBSgenomeDataPkg is done build the source package in the terminal
 ## R CMD build <pkgdir>
 ## R CMD check <tarball>
