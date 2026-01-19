@@ -1,8 +1,13 @@
 # created: Sheri Sanders
 # modified: Elizabeth Brooks
-# last updated: 16 January 2026
+# updated: 16 January 2026
 
 ## Code for the User Interface through Shiny
+
+# generate a manifest.json for posit connect cloud
+# run in the console
+#setwd("/Users/bamflappy/Downloads/GBCF_GenomeBrowser/apps")
+#rsconnect::writeManifest()
 
 # lists of dependent packages
 packageList <- c("BiocManager", "shiny", "seqinr", "kableExtra")
